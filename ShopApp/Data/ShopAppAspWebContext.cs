@@ -33,13 +33,13 @@ public partial class ShopAppAspWebContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-PFRQIVL\\SQLEXPRESS01;Initial Catalog=ShopAppAspWeb;User ID=sa;Password=1234$;Trust Server Certificate=True");
+        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-PFRQIVL\\SQLEXPRESS01;Initial Catalog=ShopAppAspWeb;Persist Security Info=True;User ID=sa;Password=1234$;Trust Server Certificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Account>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__Accounts__CB9A1CFFBB216F4B");
+            entity.HasKey(e => e.UserId).HasName("PK__Accounts__CB9A1CFF4F198679");
 
             entity.Property(e => e.UserId).HasColumnName("userId");
             entity.Property(e => e.UserActive)
@@ -83,7 +83,7 @@ public partial class ShopAppAspWebContext : DbContext
 
         modelBuilder.Entity<Blog>(entity =>
         {
-            entity.HasKey(e => e.BlogId).HasName("PK__Blogs__FA0AA72DBFFEC72A");
+            entity.HasKey(e => e.BlogId).HasName("PK__Blogs__FA0AA72D95DF719A");
 
             entity.Property(e => e.BlogId).HasColumnName("blogId");
             entity.Property(e => e.BlogDescription)
@@ -102,7 +102,7 @@ public partial class ShopAppAspWebContext : DbContext
 
         modelBuilder.Entity<Cart>(entity =>
         {
-            entity.HasKey(e => e.CartId).HasName("PK__Carts__415B03B89FC5A6DA");
+            entity.HasKey(e => e.CartId).HasName("PK__Carts__415B03B8F4CAB132");
 
             entity.Property(e => e.CartId).HasColumnName("cartId");
             entity.Property(e => e.ProductId).HasColumnName("productId");
@@ -116,16 +116,16 @@ public partial class ShopAppAspWebContext : DbContext
 
             entity.HasOne(d => d.Product).WithMany(p => p.Carts)
                 .HasForeignKey(d => d.ProductId)
-                .HasConstraintName("FK__Carts__productId__25518C17");
+                .HasConstraintName("FK__Carts__productId__5629CD9C");
 
             entity.HasOne(d => d.User).WithMany(p => p.Carts)
                 .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__Carts__userId__2645B050");
+                .HasConstraintName("FK__Carts__userId__571DF1D5");
         });
 
         modelBuilder.Entity<Category>(entity =>
         {
-            entity.HasKey(e => e.CategoryId).HasName("PK__Categori__23CAF1D84239DDF3");
+            entity.HasKey(e => e.CategoryId).HasName("PK__Categori__23CAF1D85090DB53");
 
             entity.Property(e => e.CategoryId).HasColumnName("categoryId");
             entity.Property(e => e.CategoryName)
@@ -143,7 +143,7 @@ public partial class ShopAppAspWebContext : DbContext
 
         modelBuilder.Entity<Log>(entity =>
         {
-            entity.HasKey(e => e.LogId).HasName("PK__Logs__7839F64D10255C85");
+            entity.HasKey(e => e.LogId).HasName("PK__Logs__7839F64DEAEF5831");
 
             entity.Property(e => e.LogId).HasColumnName("logId");
             entity.Property(e => e.IpAdress)
@@ -182,7 +182,7 @@ public partial class ShopAppAspWebContext : DbContext
 
         modelBuilder.Entity<Order>(entity =>
         {
-            entity.HasKey(e => e.OrderId).HasName("PK__Orders__0809335D6F8DA584");
+            entity.HasKey(e => e.OrderId).HasName("PK__Orders__0809335DCBFC252D");
 
             entity.Property(e => e.OrderId).HasColumnName("orderId");
             entity.Property(e => e.OrderAddress)
@@ -228,12 +228,12 @@ public partial class ShopAppAspWebContext : DbContext
 
             entity.HasOne(d => d.User).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__Orders__userId__4D5F7D71");
+                .HasConstraintName("FK__Orders__userId__6383C8BA");
         });
 
         modelBuilder.Entity<OrderDetail>(entity =>
         {
-            entity.HasKey(e => e.OrderDetailId).HasName("PK__OrderDet__E4FEDE4A3C280847");
+            entity.HasKey(e => e.OrderDetailId).HasName("PK__OrderDet__E4FEDE4ADFB7A82D");
 
             entity.ToTable("OrderDetail");
 
@@ -249,11 +249,19 @@ public partial class ShopAppAspWebContext : DbContext
             entity.Property(e => e.TotalMoney)
                 .HasDefaultValue(0.0)
                 .HasColumnName("totalMoney");
+
+            entity.HasOne(d => d.Order).WithMany(p => p.OrderDetails)
+                .HasForeignKey(d => d.OrderId)
+                .HasConstraintName("FK__OrderDeta__order__693CA210");
+
+            entity.HasOne(d => d.Product).WithMany(p => p.OrderDetails)
+                .HasForeignKey(d => d.ProductId)
+                .HasConstraintName("FK__OrderDeta__produ__6A30C649");
         });
 
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.HasKey(e => e.ProductId).HasName("PK__Products__2D10D16AB7B011E7");
+            entity.HasKey(e => e.ProductId).HasName("PK__Products__2D10D16A21E42281");
 
             entity.Property(e => e.ProductId).HasColumnName("productId");
             entity.Property(e => e.ProductCategoryId).HasColumnName("productCategoryId");
@@ -281,7 +289,7 @@ public partial class ShopAppAspWebContext : DbContext
 
             entity.HasOne(d => d.ProductCategory).WithMany(p => p.Products)
                 .HasForeignKey(d => d.ProductCategoryId)
-                .HasConstraintName("FK__Products__produc__7B5B524B");
+                .HasConstraintName("FK__Products__produc__4CA06362");
         });
 
         OnModelCreatingPartial(modelBuilder);

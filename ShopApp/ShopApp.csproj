@@ -9,6 +9,8 @@
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="wwwroot\Uploads\accounts\" />
+    <Folder Include="wwwroot\Uploads\blogs\" />
+    <Folder Include="wwwroot\Uploads\products\" />
   </ItemGroup>
 
   <ItemGroup>

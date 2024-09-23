@@ -64,8 +64,37 @@ namespace ShopApp.Areas.Admin.Controllers
 
             }
 
-            var pagedCategories = accounts.ToPagedList(page, limit);
-            return View(pagedCategories);
+            if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(sort))
+            {
+                ViewBag.sorts = sort;
+                switch (sort)
+                {
+                    case "Id-ASC":
+                        accounts = await _context.Accounts
+                            .Where(x => x.UserName.Contains(name) || x.UserEmail.Contains(name) || x.UserFullName.Contains(name))
+                            .OrderBy(x => x.UserId).ToListAsync();
+                        break;
+                    case "Id-DESC":
+                        accounts = await _context.Accounts.OrderByDescending(x => x.UserId)
+                            .Where(x => x.UserName.Contains(name) || x.UserEmail.Contains(name) || x.UserFullName.Contains(name))
+                            .ToListAsync();
+                        break;
+
+                    case "UName-ASC":
+                        accounts = await _context.Accounts.OrderBy(x => x.UserName)
+                            .Where(x => x.UserName.Contains(name) || x.UserEmail.Contains(name) || x.UserFullName.Contains(name))
+                            .ToListAsync();
+                        break;
+                    case "UName-DESC":
+                        accounts = await _context.Accounts.OrderByDescending(x => x.UserName)
+                            .Where(x => x.UserName.Contains(name) || x.UserEmail.Contains(name) || x.UserFullName.Contains(name))
+                            .ToListAsync();
+                        break;
+                }
+            }
+
+            var pagedData = accounts.ToPagedList(page, limit);
+            return View(pagedData);
         }
 
         // GET: Admin/Account/Details/5
@@ -100,6 +129,14 @@ namespace ShopApp.Areas.Admin.Controllers
         public async Task<IActionResult> Create(IFormFile fileUpload, [Bind("UserId,UserName,UserPassword,UserFullName,UserPhone,UserAddress,UserAvatar,UserEmail,UserGender,UserActive,UserRole")] Account account)
         {
             // validate form
+            if (string.IsNullOrEmpty(account.UserName))
+            {
+                ModelState.AddModelError("UserName", "Tên tài khoản không được để trống.");
+            }
+            if (string.IsNullOrEmpty(account.UserName))
+            {
+                ModelState.AddModelError("UserFullName", "Tên tài khoản không được để trống.");
+            }
 
 
             if (_context.Accounts.Any(x => x.UserName == account.UserName))

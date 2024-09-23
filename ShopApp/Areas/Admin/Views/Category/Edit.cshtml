@@ -12,7 +12,7 @@
                 <div class="iq-card">
                     <div class="iq-card-header d-flex justify-content-between">
                         <div class="iq-header-title">
-                            <h4 class="card-title">Thêm danh mục</h4>
+                            <h4 class="card-title">Chỉnh sửa danh mục</h4>
                         </div>
                     </div>
                     <div class="iq-card-body">
@@ -50,7 +50,7 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-    @* <script>
+    <script>
         function ChangeToSlug() {
             var slug = document.getElementById("slug").value;
             slug = slug.toLowerCase();
@@ -58,5 +58,5 @@
             slug = slug.replace(/[^\w-]+/g, ""); // Xóa các ký tự không phải là chữ cái, số hoặc dấu gạch
             document.getElementById("CategorySlug").value = slug; // Cập nhật slug vào ô nhập
         }
-    </script> *@
+    </script>
 }

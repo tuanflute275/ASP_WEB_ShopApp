@@ -13608,11 +13608,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Code\\Csharp\\ASP_WEB_MVC\\ShopApp\\ShopApp\\ShopApp.csproj",
+      "projectUniqueName": "D:\\Code\\Csharp\\ASP_WEB_MVC\\ASP_WEB_ShopApp\\ShopApp\\ShopApp.csproj",
       "projectName": "ShopApp",
-      "projectPath": "D:\\Code\\Csharp\\ASP_WEB_MVC\\ShopApp\\ShopApp\\ShopApp.csproj",
+      "projectPath": "D:\\Code\\Csharp\\ASP_WEB_MVC\\ASP_WEB_ShopApp\\ShopApp\\ShopApp.csproj",
       "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-      "outputPath": "D:\\Code\\Csharp\\ASP_WEB_MVC\\ShopApp\\ShopApp\\obj\\",
+      "outputPath": "D:\\Code\\Csharp\\ASP_WEB_MVC\\ASP_WEB_ShopApp\\ShopApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",

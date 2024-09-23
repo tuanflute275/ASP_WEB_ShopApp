@@ -29,5 +29,7 @@ public partial class Order
 
     public int? UserId { get; set; }
 
+    public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
+
     public virtual Account? User { get; set; }
 }
